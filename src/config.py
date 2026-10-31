@@ -14,7 +14,7 @@ DEBUG = os.getenv("DEBUG", "false").strip().lower() in {
     "on",
 }
 
-def get_grok_api_key():
+def get_groq_api_key():
     api_key = os.getenv("GROQ_API_KEY", "").strip()
     if not api_key:
         raise ValueError("GROQ_API_KEY is not set in the environment variables.")

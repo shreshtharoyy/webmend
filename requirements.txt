@@ -4,3 +4,5 @@ langgraph
 pydantic
 streamlit
 pytest
+python-dotenv>=1.0,<2.0
+pytest>=8.0
