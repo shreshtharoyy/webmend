@@ -1,0 +1,6 @@
+playwright
+langchain
+langgraph
+pydantic
+streamlit
+pytest
