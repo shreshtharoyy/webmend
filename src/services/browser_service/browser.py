@@ -1,8 +1,10 @@
 from playwright.sync_api import sync_playwright
+from src.services.browser_service.security import validate_url
 
 def inspect_webpage(url:str) -> dict:
+    url = validate_url(url)
     with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(headless=False)
+        browser = playwright.chromium.launch(headless=True)
 
         try:
             page = browser.new_page()

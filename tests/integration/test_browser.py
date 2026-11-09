@@ -52,16 +52,39 @@ def local_webpage():
     server.server_close()
     thread.join(timeout=5)
 
-def test_inspect_webpage_returns_title(local_webpage):
-    result = inspect_webpage(local_webpage)
+def test_inspect_webpage_returns_title(allow_local_test_url):
+    result = inspect_webpage(allow_local_test_url)
     assert result["title"] == "WebMend Test Page"
 
 
-def test_inspect_webpage_returns_html(local_webpage):
-    result = inspect_webpage(local_webpage)
+def test_inspect_webpage_returns_html(allow_local_test_url):
+    result = inspect_webpage(allow_local_test_url)
     assert "<h1>Welcome to WebMend</h1>" in result["html"]
 
 
-def test_inspect_webpage_returns_url(local_webpage):
-    result = inspect_webpage(local_webpage)
-    assert result["url"] == f"{local_webpage}/"
+def test_inspect_webpage_returns_url(allow_local_test_url):
+    result = inspect_webpage(allow_local_test_url)
+    assert result["url"] == f"{allow_local_test_url}/"
+
+def test_inspect_webpage_rejects_localhost():
+    with pytest.raises(ValueError):
+        inspect_webpage("http://localhost:8000")
+
+
+def test_inspect_webpage_rejects_private_ip():
+    with pytest.raises(ValueError):
+        inspect_webpage("http://192.168.1.1")
+
+@pytest.fixture
+def allow_local_test_url(monkeypatch, local_webpage):
+    def test_url_validator(url):
+        if url != local_webpage:
+            raise ValueError("Only the test server URL is allowed.")
+        return url
+
+    monkeypatch.setattr(
+        "src.services.browser_service.browser.validate_url",
+        test_url_validator,
+    )
+
+    return local_webpage
