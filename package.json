@@ -1,0 +1,26 @@
+{
+  "name": "webmend",
+  "version": "1.0.0",
+  "description": "An AI-powered web accessibility auditing and auto-remediation system.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shreshtharoyy/webmend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shreshtharoyy/webmend/issues"
+  },
+  "homepage": "https://github.com/shreshtharoyy/webmend#readme",
+  "dependencies": {
+    "axe-core": "4.14.0"
+  }
+}
